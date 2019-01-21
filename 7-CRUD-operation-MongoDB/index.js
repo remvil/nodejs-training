@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/playground')
+mongoose.connect('mongodb://192.168.99.100:32771/playground')
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...', err));
 
@@ -16,9 +16,9 @@ const Course = mongoose.model('Course', courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    name: 'Angular.js Course',
+    name: 'Node.js Course',
     author: 'Remigio',
-    tags: ['angular', 'frontend'],
+    tags: ['node', 'backend'],
     isPublished: true
   });
 
@@ -40,17 +40,17 @@ async function getCourses(){
   // .find({ author: /Vildacci$/i }) // Ends with
   // .find({author: /.*emig.*/ }) // contains
 
-  // pagination
-  // .skip((pageNumber -1) * pageSize)
-  // .limit(pageSize)
+  // Pagination
+  .skip((pageNumber -1) * pageSize)
+  .limit(pageSize)
 
   .limit(10)
   .sort({ name: 1 })
   // .select({ name: 1, tags: 1})
 
   // Counting
-  // .count()
+  // .count();
   console.log(courses);
 }
-
+// createCourse();
 getCourses();
