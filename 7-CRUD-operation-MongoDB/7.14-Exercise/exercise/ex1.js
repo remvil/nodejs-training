@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const { mongoDBport } = require('../config');
+const { mongoDBhost } = require('../config');
 
-mongoose.connect('mongodb://192.168.99.100:32771/mongo-exercises', { useNewUrlParser: true })
-.then(() => console.log('Connected to MongoDB...'))
-.catch(err => console.error('Could not connect to MongoDB...', err));
+mongoose.connect(`mongodb://${mongoDBhost}:${mongoDBport}/playground`, {useNewUrlParser: true})
+  .then(() => console.log('Connected to MongoDB...'))
+  .catch(err => console.error('Could not connect to MongoDB...', err));
 
 const courseSchema = new mongoose.Schema({
   name: String,
