@@ -1,16 +1,12 @@
 {
-  "name": "7-CRUD-operation-MongoDB",
+  "name": "9-Mongoose-ModellingRelationships",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "mongoose": "^5.4.0"
-  },
-  "devDependencies": {},
-  "description": ""
+  "license": "ISC"
 }
