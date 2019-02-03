@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { mongoDBport } = require('../config');
-const { mongoDBhost } = require('../config');
+const { mongoDBport } = require('../../../config');
+const { mongoDBhost } = require('../../../config');
 
 mongoose.connect(`mongodb://${mongoDBhost}:${mongoDBport}/playground`, {useNewUrlParser: true})
   .then(() => console.log('Connected to MongoDB...'))
