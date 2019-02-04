@@ -1,8 +1,14 @@
+const auth = require('../middleware/auth');
 const {User, validate} = require('../models/user');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
+
+router.get('/me', auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select('-password');
+  res.send(user);
+});
 
 // Add a User to genres list
 router.post('/', async (req, res) => {
@@ -19,6 +25,6 @@ router.post('/', async (req, res) => {
 
   const token = user.generateAuthToken();
   res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
-})
+});
 
 module.exports = router;
