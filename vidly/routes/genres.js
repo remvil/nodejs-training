@@ -1,38 +1,41 @@
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
-const {Genre, validate} = require('../models/genre');
+const { Genre, validate } = require('../models/genre');
 const mongoose = require('mongoose');
 const Joi = require('joi');
 const express = require('express');
 const router = express.Router();
 
 // function fillGenresCollection(){
-  // const genres = [
-  //   { id: 1, name: 'Animazione'},
-  //   { id: 2, name: 'Avventura'},
-  //   { id: 3, name: 'Biografico'},
-  //   { id: 4, name: 'Commedia'},
-  //   { id: 5, name: 'Documentario'},
-  //   { id: 6, name: 'Drammatico'},
-  //   { id: 7, name: 'Erotico'},
-  //   { id: 8, name: 'Fantascienza'},
-  //   { id: 9, name: 'Fantasy/Fantastico'},
-  //   { id: 10, name: 'Guerra'},
-  //   { id: 11, name: 'Horror'},
-  //   { id: 12, name: 'Musical'},
-  //   { id: 13, name: 'Storico'},
-  //   { id: 14, name: 'Thriller'},
-  //   { id: 15, name: 'Western'}
-  // ];
-  // for (var i = 2; i < genres.length; i++) {
-  //   console.log(genres[i].name);
-  //   let genre = new Genre({ name: genres[i].name });
-  //   genre = await genre.save();
-  // }
+// const genres = [
+//   { id: 1, name: 'Animazione'},
+//   { id: 2, name: 'Avventura'},
+//   { id: 3, name: 'Biografico'},
+//   { id: 4, name: 'Commedia'},
+//   { id: 5, name: 'Documentario'},
+//   { id: 6, name: 'Drammatico'},
+//   { id: 7, name: 'Erotico'},
+//   { id: 8, name: 'Fantascienza'},
+//   { id: 9, name: 'Fantasy/Fantastico'},
+//   { id: 10, name: 'Guerra'},
+//   { id: 11, name: 'Horror'},
+//   { id: 12, name: 'Musical'},
+//   { id: 13, name: 'Storico'},
+//   { id: 14, name: 'Thriller'},
+//   { id: 15, name: 'Western'}
+// ];
+// for (var i = 2; i < genres.length; i++) {
+//   console.log(genres[i].name);
+//   let genre = new Genre({ name: genres[i].name });
+//   genre = await genre.save();
 // }
+// }
+
 
 // Get the list of genres
 router.get('/', async (req, res) => {
+  // Test Errors
+  // throw new Error('Could not')
   const genres = await Genre.find().sort('name');
   res.send(genres);
 });
@@ -45,7 +48,7 @@ router.post('/', auth, async (req, res) => {
   let genre = new Genre({ name: req.body.name });
   genre = await genre.save();
   res.send(genre);
-})
+});
 
 // Edit a genre
 router.put('/:id', auth, async (req, res) => {
@@ -68,7 +71,7 @@ router.delete('/:id', [auth, admin], async (req, res) => {
 });
 
 // Get a single genre detail
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const genre = Genre.findById(req.params.id);
   if (!genre) return res.status(404).send('The genre with the given ID was not found.');
   res.send(genre);
